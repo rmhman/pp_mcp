@@ -1,0 +1,17 @@
+{
+    "mcpServers": {
+        "powerpoint": {
+            "command": "docker",
+            "args": [
+                "run",
+                "--rm",
+                "-i",
+                "-v",
+                "~/PowerPoints:/home/mcpuser/PowerPoints",
+                "--user",
+                "1000:1000",
+                "powerpoint-mcp"
+            ]
+        }
+    }
+}

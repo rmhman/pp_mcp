@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  powerpoint-mcp:
+    build: .
+    container_name: powerpoint-mcp-server
+    volumes:
+      # Mount host PowerPoint directory to container
+      - ~/PowerPoints:/home/mcpuser/PowerPoints
+    environment:
+      - PYTHONUNBUFFERED=1
+    # Ensure the container runs with proper user permissions
+    user: "1000:1000"
+    # Keep container running
+    tty: true
+    stdin_open: true
