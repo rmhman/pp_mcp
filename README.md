@@ -4,7 +4,7 @@ A Model Context Protocol (MCP) server that creates and manages PowerPoint presen
 
 ## Purpose
 
-This MCP server provides a secure interface for AI assistants to create, modify, and manage PowerPoint (.pptx) files in your local ~/PowerPoints directory.
+This MCP server provides a secure interface for AI assistants to create, modify, and manage PowerPoint (.pptx) files in your local /tmp/PowerPoints directory.
 
 ## Features
 
@@ -12,7 +12,7 @@ This MCP server provides a secure interface for AI assistants to create, modify,
 
 - **`create_presentation`** - Create a new PowerPoint presentation with optional title slide
 - **`add_slide`** - Add new slides with title and content to existing presentations
-- **`list_presentations`** - List all PowerPoint files in the ~/PowerPoints directory
+- **`list_presentations`** - List all PowerPoint files in the /tmp/PowerPoints directory
 - **`get_presentation_info`** - Get detailed information about a specific presentation
 
 ## Prerequisites
@@ -33,6 +33,7 @@ This MCP server provides a secure interface for AI assistants to create, modify,
 2. **Configure Claude Desktop** with volume mounting:
 
    Add this to your Claude Desktop MCP configuration:
+
    ```json
    {
      "mcpServers": {
@@ -52,12 +53,11 @@ This MCP server provides a secure interface for AI assistants to create, modify,
      }
    }
    ```
-   
-   **Important**: Use the full absolute path `/Users/ross/PowerPoints` instead of `~/PowerPoints` because Docker doesn't expand `~` when passed through JSON/CLI arguments.
 
 ### Alternative: Persistent Container Setup
 
 1. **Run the setup script:**
+
    ```bash
    ./setup.sh
    ```
@@ -67,16 +67,19 @@ This MCP server provides a secure interface for AI assistants to create, modify,
 ### Manual Setup
 
 1. **Create PowerPoint directory:**
+
    ```bash
    mkdir -p /tmp/PowerPoints
    ```
 
 2. **Build Docker image:**
+
    ```bash
    docker build -t powerpoint-mcp .
    ```
 
 3. **Run with volume mount:**
+
    ```bash
    docker run -d \
      --name powerpoint-mcp-server \
@@ -99,26 +102,26 @@ To use this MCP server with VS Code:
 1. **Install MCP Toolkit extension** in VS Code
 2. **Add server configuration** to your VS Code settings (`mcp.json`):
 
-```json
-{
-  "mcp.servers": {
-    "powerpoint": {
-      "command": "docker",
-      "args": [
-        "run",
-        "--rm",
-        "-i",
-        "-v",
-        "/tmp/PowerPoints:/home/mcpuser/PowerPoints",
-        "--user",
-        "1000:1000",
-        "powerpoint-mcp"
-      ],
-      "type": "stdio"
+  ```json
+  {
+    "mcp.servers": {
+      "powerpoint": {
+        "command": "docker",
+        "args": [
+          "run",
+          "--rm",
+          "-i",
+          "-v",
+          "/tmp/PowerPoints:/home/mcpuser/PowerPoints",
+          "--user",
+          "1000:1000",
+          "powerpoint-mcp"
+        ],
+        "type": "stdio"
+      }
     }
   }
-}
-```
+  ```
 
 3. **Restart VS Code** to load the MCP server
 4. **Use the PowerPoint tools** through the MCP Toolkit interface
@@ -134,10 +137,10 @@ In Claude Desktop, you can ask:
 
 ## Architecture
 
-```
+```text
 Claude Desktop → MCP Gateway → PowerPoint MCP Server → Local File System
 ↓
-~/PowerPoints Directory
+/tmp/PowerPoints Directory
 ```
 
 ## Development
@@ -172,6 +175,7 @@ docker run --rm -v /tmp/PowerPoints:/home/mcpuser/PowerPoints --user 1000:1000 p
 **Problem:** Presentations are created but disappear when trying to add slides.
 
 **Solution:** This is caused by missing volume mounts. Ensure you're running with:
+
 ```bash
 docker run -v /tmp/PowerPoints:/home/mcpuser/PowerPoints ...
 ```

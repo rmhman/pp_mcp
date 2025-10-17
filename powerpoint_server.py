@@ -24,7 +24,7 @@ from mcp.server.fastmcp import FastMCP
 mcp = FastMCP("powerpoint")
 
 # Configuration
-POWERPOINT_DIR = os.path.expanduser("~/PowerPoints")
+POWERPOINT_DIR = os.path.expanduser("/tmp/PowerPoints")
 
 # === UTILITY FUNCTIONS ===
 
@@ -146,7 +146,7 @@ async def add_slide(filename: str = "", slide_title: str = "", slide_content: st
 
 @mcp.tool()
 async def list_presentations() -> str:
-    """List all PowerPoint presentations in the ~/PowerPoints directory."""
+    """List all PowerPoint presentations in the /tmp/PowerPoints directory."""
     logger.info("Listing presentations")
 
     try:

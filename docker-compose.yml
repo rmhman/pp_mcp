@@ -6,7 +6,7 @@ services:
     container_name: powerpoint-mcp-server
     volumes:
       # Mount host PowerPoint directory to container
-      - ~/PowerPoints:/home/mcpuser/PowerPoints
+      - /tmp/PowerPoints:/home/mcpuser/PowerPoints
     environment:
       - PYTHONUNBUFFERED=1
     # Ensure the container runs with proper user permissions

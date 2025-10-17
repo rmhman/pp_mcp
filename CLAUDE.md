@@ -44,7 +44,7 @@ powerpoint-mcp-server/
   - Error handling for missing files
 
 #### 3. list_presentations
-- **Purpose**: Lists all PowerPoint files in ~/PowerPoints
+- **Purpose**: Lists all PowerPoint files in /tmp/PowerPoints
 - **Features**:
   - File size and modification time
   - Sorted alphabetical listing
@@ -113,7 +113,7 @@ MCP Gateway (Docker)
     ↓ (Docker network)
 PowerPoint MCP Server (Container)
     ↓ (volume mount)
-~/PowerPoints Directory (Host filesystem)
+/tmp/PowerPoints Directory (Host filesystem)
 ```
 
 ## Monitoring and Debugging
@@ -127,7 +127,7 @@ PowerPoint MCP Server (Container)
 ### Common Issues
 
 1. **Permission Errors**: Check Docker volume permissions
-2. **Missing Directory**: Server creates ~/PowerPoints automatically
+2. **Missing Directory**: Server creates /tmp/PowerPoints automatically
 3. **File Conflicts**: Safe filename handling prevents issues
 4. **Memory Issues**: Presentations loaded on-demand
 

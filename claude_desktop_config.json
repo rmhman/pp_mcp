@@ -7,7 +7,7 @@
                 "--rm",
                 "-i",
                 "-v",
-                "~/PowerPoints:/home/mcpuser/PowerPoints",
+                "/tmp/PowerPoints:/home/mcpuser/PowerPoints",
                 "--user",
                 "1000:1000",
                 "powerpoint-mcp"
