@@ -25,6 +25,8 @@ mcp = FastMCP("powerpoint")
 
 # Configuration
 POWERPOINT_DIR = os.path.expanduser("/tmp/PowerPoints")
+PPTX_EXTENSION = ".pptx"
+ERROR_FILENAME_REQUIRED = "❌ Error: Filename is required"
 
 # === UTILITY FUNCTIONS ===
 
@@ -55,9 +57,8 @@ def get_safe_filename(filename: str) -> str:
 async def create_presentation(filename: str = "", title: str = "") -> str:
     """Create a new PowerPoint presentation file."""
     logger.info(f"Creating presentation: {filename}")
-
     if not filename.strip():
-        return "❌ Error: Filename is required"
+        return ERROR_FILENAME_REQUIRED
 
     if not ensure_powerpoint_dir():
         return f"❌ Error: Could not create directory {POWERPOINT_DIR}"
@@ -77,9 +78,8 @@ async def create_presentation(filename: str = "", title: str = "") -> str:
             subtitle_shape.text = f"Created on {datetime.now().strftime('%B %d, %Y')}"
 
         # Save file
-        safe_filename = get_safe_filename(filename)
-        if not safe_filename.endswith(".pptx"):
-            safe_filename += ".pptx"
+        if not safe_filename.endswith(PPTX_EXTENSION):
+            safe_filename += PPTX_EXTENSION
 
         filepath = os.path.join(POWERPOINT_DIR, safe_filename)
         prs.save(filepath)
@@ -97,13 +97,13 @@ async def add_slide(filename: str = "", slide_title: str = "", slide_content: st
     logger.info(f"Adding slide to: {filename}")
 
     if not filename.strip():
-        return "❌ Error: Filename is required"
+        return "ERROR_FILENAME_REQUIRED"
 
     try:
         # Find the presentation file
         safe_filename = get_safe_filename(filename)
-        if not safe_filename.endswith(".pptx"):
-            safe_filename += ".pptx"
+        if not safe_filename.endswith("PPTX_EXTENSION"):
+            safe_filename += "PPTX_EXTENSION"
 
         filepath = os.path.join(POWERPOINT_DIR, safe_filename)
 
@@ -152,8 +152,7 @@ async def list_presentations() -> str:
     try:
         if not os.path.exists(POWERPOINT_DIR):
             return f"📁 Directory {POWERPOINT_DIR} does not exist yet. Create a presentation first!"
-
-        files = [f for f in os.listdir(POWERPOINT_DIR) if f.endswith(".pptx")]
+        files = [f for f in os.listdir(POWERPOINT_DIR) if f.endswith(PPTX_EXTENSION)]
 
         if not files:
             return f"📁 No PowerPoint presentations found in {POWERPOINT_DIR}"
@@ -181,13 +180,13 @@ async def get_presentation_info(filename: str = "") -> str:
     logger.info(f"Getting info for: {filename}")
 
     if not filename.strip():
-        return "❌ Error: Filename is required"
+        return "ERROR_FILENAME_REQUIRED"
 
     try:
         # Find the presentation file
         safe_filename = get_safe_filename(filename)
-        if not safe_filename.endswith(".pptx"):
-            safe_filename += ".pptx"
+        if not safe_filename.endswith("PPTX_EXTENSION"):
+            safe_filename += "PPTX_EXTENSION"
 
         filepath = os.path.join(POWERPOINT_DIR, safe_filename)
 
