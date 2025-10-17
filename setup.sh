@@ -10,8 +10,8 @@ echo "=============================="
 
 # Create PowerPoint directory on host if it doesn't exist
 echo "📁 Creating PowerPoint directory..."
-mkdir -p ~/PowerPoints
-echo "✅ PowerPoint directory created at ~/PowerPoints"
+mkdir -p /tmp/PowerPoints
+echo "✅ PowerPoint directory created at /tmp/PowerPoints"
 
 # Build Docker image
 echo "🔨 Building Docker image..."
@@ -26,7 +26,7 @@ docker rm powerpoint-mcp-server 2>/dev/null || true
 echo "🚀 Starting PowerPoint MCP server for testing..."
 docker run -d \
   --name powerpoint-mcp-server \
-  -v ~/PowerPoints:/home/mcpuser/PowerPoints \
+  -v /tmp/PowerPoints:/home/mcpuser/PowerPoints \
   -e PYTHONUNBUFFERED=1 \
   --user 1000:1000 \
   --entrypoint /bin/bash \
@@ -42,7 +42,7 @@ echo ""
 echo "🔍 To test the server:"
 echo "1. Check container logs: docker logs powerpoint-mcp-server"
 echo "2. Test MCP tools through Claude Desktop"
-echo "3. Check ~/PowerPoints directory for created files"
+echo "3. Check /tmp/PowerPoints directory for created files"
 echo ""
 echo "🛠️  Management Commands:"
 echo "- Stop server: docker stop powerpoint-mcp-server"
