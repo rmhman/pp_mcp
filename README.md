@@ -43,7 +43,7 @@ This MCP server provides a secure interface for AI assistants to create, modify,
            "--rm",
            "-i",
            "-v",
-           "/Users/ross/PowerPoints:/home/mcpuser/PowerPoints",
+           "/tmp/PowerPoints:/home/mcpuser/PowerPoints",
            "--user",
            "1000:1000",
            "powerpoint-mcp"
@@ -68,7 +68,7 @@ This MCP server provides a secure interface for AI assistants to create, modify,
 
 1. **Create PowerPoint directory:**
    ```bash
-   mkdir -p ~/PowerPoints
+   mkdir -p /tmp/PowerPoints
    ```
 
 2. **Build Docker image:**
@@ -80,7 +80,7 @@ This MCP server provides a secure interface for AI assistants to create, modify,
    ```bash
    docker run -d \
      --name powerpoint-mcp-server \
-     -v ~/PowerPoints:/home/mcpuser/PowerPoints \
+     -v /tmp/PowerPoints:/home/mcpuser/PowerPoints \
      -e PYTHONUNBUFFERED=1 \
      --user 1000:1000 \
      powerpoint-mcp
@@ -97,7 +97,7 @@ docker-compose up -d
 To use this MCP server with VS Code:
 
 1. **Install MCP Toolkit extension** in VS Code
-2. **Add server configuration** to your VS Code settings (`settings.json`):
+2. **Add server configuration** to your VS Code settings (`mcp.json`):
 
 ```json
 {
@@ -109,7 +109,7 @@ To use this MCP server with VS Code:
         "--rm",
         "-i",
         "-v",
-        "/Users/ross/PowerPoints:/home/mcpuser/PowerPoints",
+        "/tmp/PowerPoints:/home/mcpuser/PowerPoints",
         "--user",
         "1000:1000",
         "powerpoint-mcp"
@@ -149,10 +149,10 @@ Claude Desktop → MCP Gateway → PowerPoint MCP Server → Local File System
 docker build -t powerpoint-mcp .
 
 # Test with volume mount
-docker run --rm -i -v /Users/ross/PowerPoints:/home/mcpuser/PowerPoints --user 1000:1000 powerpoint-mcp
+docker run --rm -i -v /tmp/PowerPoints:/home/mcpuser/PowerPoints --user 1000:1000 powerpoint-mcp
 
 # Test volume mount
-docker run --rm -v /Users/ross/PowerPoints:/home/mcpuser/PowerPoints --user 1000:1000 powerpoint-mcp ls -la /home/mcpuser/PowerPoints
+docker run --rm -v /tmp/PowerPoints:/home/mcpuser/PowerPoints --user 1000:1000 powerpoint-mcp ls -la /home/mcpuser/PowerPoints
 
 # Test MCP tools directly (requires Python)
 ./test_docker.sh
@@ -173,7 +173,7 @@ docker run --rm -v /Users/ross/PowerPoints:/home/mcpuser/PowerPoints --user 1000
 
 **Solution:** This is caused by missing volume mounts. Ensure you're running with:
 ```bash
-docker run -v ~/PowerPoints:/home/mcpuser/PowerPoints ...
+docker run -v /tmp/PowerPoints:/home/mcpuser/PowerPoints ...
 ```
 
 Or use the provided setup script: `./setup.sh`
