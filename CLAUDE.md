@@ -14,7 +14,7 @@ This MCP server demonstrates the power of Model Context Protocol by enabling AI 
 
 ### File Structure
 
-```
+```text
 powerpoint-mcp-server/
 ├── Dockerfile              # Container configuration
 ├── requirements.txt        # Python dependencies
@@ -26,15 +26,17 @@ powerpoint-mcp-server/
 ### Tool Implementations
 
 #### 1. create_presentation
+
 - **Purpose**: Creates new PowerPoint files with optional title slide
 - **Parameters**: filename (required), title (optional)
-- **Features**: 
+- **Features**:
   - Automatic .pptx extension handling
   - Safe filename sanitization
   - Directory creation if needed
   - Title slide with creation date
 
 #### 2. add_slide
+
 - **Purpose**: Adds content slides to existing presentations
 - **Parameters**: filename (required), slide_title (optional), slide_content (optional)
 - **Features**:
@@ -44,6 +46,7 @@ powerpoint-mcp-server/
   - Error handling for missing files
 
 #### 3. list_presentations
+
 - **Purpose**: Lists all PowerPoint files in /tmp/PowerPoints
 - **Features**:
   - File size and modification time
@@ -51,6 +54,7 @@ powerpoint-mcp-server/
   - Graceful handling of empty directory
 
 #### 4. get_presentation_info
+
 - **Purpose**: Detailed information about specific presentations
 - **Features**:
   - File metadata (size, modification time)
@@ -106,7 +110,7 @@ The server is designed for easy extension:
 
 ## Deployment Architecture
 
-```
+```text
 Claude Desktop
     ↓ (stdio transport)
 MCP Gateway (Docker)

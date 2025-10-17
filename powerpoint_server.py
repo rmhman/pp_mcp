@@ -219,7 +219,7 @@ async def get_presentation_info(filename: str = "") -> str:
                 try:
                     if slide.shapes.title and slide.shapes.title.text:
                         title = slide.shapes.title.text.strip() or "Untitled"
-                except:
+                except Exception:
                     pass
                 result += f"{i}. {title}\n"
 

@@ -16,12 +16,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the server code
 COPY powerpoint_server.py .
 
-# Create non-root user with home directory
+# Create non-root user with home directory and PowerPoint directory
 RUN useradd -m -u 1000 mcpuser && \
-    chown -R mcpuser:mcpuser /app
-
-# Create PowerPoint directory in user's home
-RUN mkdir -p /home/mcpuser/PowerPoints && \
+    chown -R mcpuser:mcpuser /app && \
+    mkdir -p /home/mcpuser/PowerPoints && \
     chown -R mcpuser:mcpuser /home/mcpuser/PowerPoints
 
 # Switch to non-root user
