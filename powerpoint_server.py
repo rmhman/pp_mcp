@@ -24,7 +24,7 @@ from mcp.server.fastmcp import FastMCP
 mcp = FastMCP("powerpoint")
 
 # Configuration
-POWERPOINT_DIR = os.path.expanduser("/tmp/PowerPoints")
+POWERPOINT_DIR = "/tmp/PowerPoints"
 PPTX_EXTENSION = ".pptx"
 ERROR_FILENAME_REQUIRED = "❌ Error: Filename is required"
 
