@@ -1,0 +1,9 @@
+{
+    "powerpoint-mcp": {
+        "type": "stdio",
+        "command": "uvx",
+        "args": [
+            "/path/to/powerpoint_mcp-0.1.0-py3-none-any.whl"
+        ]
+    }
+}

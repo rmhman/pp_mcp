@@ -232,11 +232,14 @@ async def get_presentation_info(filename: str = "") -> str:
 
 # === SERVER STARTUP ===
 
-if __name__ == "__main__":
+
+def main():
     logger.info("Starting PowerPoint MCP server...")
 
     # Ensure PowerPoint directory exists
-    if not ensure_powerpoint_dir():
+    try:
+        ensure_powerpoint_dir()
+    except Exception as e:
         logger.warning(f"Could not create PowerPoint directory: {POWERPOINT_DIR}")
 
     try:
@@ -244,3 +247,7 @@ if __name__ == "__main__":
     except Exception as e:
         logger.error(f"Server error: {e}", exc_info=True)
         sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
