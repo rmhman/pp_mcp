@@ -18,7 +18,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger("powerpoint-server")
 
-# Initialize MCP server - NO PROMPT PARAMETER!
+# Initialize MCP server
 from mcp.server.fastmcp import FastMCP
 
 mcp = FastMCP("powerpoint")
