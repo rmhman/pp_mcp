@@ -99,8 +99,8 @@ docker-compose up -d
 
 To use this MCP server with VS Code:
 
-1. **Install MCP Toolkit extension** in VS Code
-2. **Add server configuration** to your VS Code settings (`mcp.json`):
+1 **Install MCP Toolkit extension** in VS Code
+2 **Add server configuration** to your VS Code settings (`mcp.json`):
 
   ```json
   {
@@ -123,8 +123,8 @@ To use this MCP server with VS Code:
   }
   ```
 
-3. **Restart VS Code** to load the MCP server
-4. **Use the PowerPoint tools** through the MCP Toolkit interface
+3 **Restart VS Code** to load the MCP server
+4 **Use the PowerPoint tools** through the MCP Toolkit interface
 
 ## Usage Examples
 
