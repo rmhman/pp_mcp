@@ -146,7 +146,7 @@ async def add_slide(filename: str = "", slide_title: str = "", slide_content: st
 
 @mcp.tool()
 async def list_presentations() -> str:
-    """List all PowerPoint presentations in the /tmp/PowerPoints directory."""
+    """List all PowerPoint presentations in the PowerPoints directory."""
     logger.info("Listing presentations")
 
     try:
