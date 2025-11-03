@@ -41,7 +41,7 @@ docker ps --filter name=powerpoint-mcp-server
 echo ""
 echo "🔍 To test the server:"
 echo "1. Check container logs: docker logs powerpoint-mcp-server"
-echo "2. Test MCP tools through Claude Desktop"
+echo "2. Test MCP tools through your AI agent"
 echo "3. Check /tmp/PowerPoints directory for created files"
 echo ""
 echo "🛠️  Management Commands:"
